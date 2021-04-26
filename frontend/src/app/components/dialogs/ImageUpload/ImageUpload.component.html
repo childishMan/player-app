@@ -1,0 +1,30 @@
+<div fxlayout fxLayoutAlign='space-between center' mat-dialog-header class='header'>
+  <div>Upload Image</div>
+  <button mat-button mat-dialog-close>
+    <mat-icon> close </mat-icon>
+  </button>
+</div>
+<mat-dialog-content>
+  <div fxLayout='column' class='uploader' fxLayoutGap='15px' fxLayoutAlign='center center'>
+    <div> Dropdown or select image ({{supportedTypes.join(' ,')}}) and press OK to select this one</div>
+    <div fxLayout='column' fxLayoutAlign='center center' class='drop'>
+      <img [src]='getImagePath()' alt="">
+      <ngx-file-drop fxFlex='100' dropZoneLabel='{{getDropLabel()}}' (onFileDrop)='dropped($event)' [multiple]='false'>
+      </ngx-file-drop>
+      <div class="spinner-holder" fxLayout fxLayoutAlign='center center' fxFlex='100' *ngIf='isLoading'>
+        <mat-spinner [diameter]='40'></mat-spinner>
+      </div>
+    </div>
+    <div *ngIf='error' class='mat-error'>
+      <span>{{error}}</span>
+    </div>
+    <div fxLayout='row' fxLayoutAlign='center center'>
+      <button mat-button (click)='upload()'>Upload</button>
+      <mat-icon style="color:green" *ngIf='isUploaded'> check </mat-icon>
+      <mat-spinner [diameter]='10' *ngIf='!isUploaded && isUploading'></mat-spinner>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align='center'>
+  <button mat-button [mat-dialog-close]='fileName' [disabled]='!isUploaded'>Done</button>
+</mat-dialog-actions>

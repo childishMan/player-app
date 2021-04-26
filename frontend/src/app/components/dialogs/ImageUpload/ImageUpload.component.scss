@@ -1,0 +1,31 @@
+.drop {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  width: 200px;
+  border-radius: 15%;
+
+  img {
+    height: 200px;
+    width: 200px;
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    object-fit: scale-down;
+  }
+  
+  .spinner-holder {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+}
+
+.mat-error {
+  font-weight: bold;
+}

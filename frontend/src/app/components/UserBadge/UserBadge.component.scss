@@ -1,0 +1,18 @@
+.user-badge {
+  max-width: 150px;
+  text-overflow: ellipsis;
+
+  .logo {
+    border-radius: 50%;
+    border: 2px solid aquamarine;
+    overflow: hidden;
+    width: 50px !important;
+    height: 50px !important;
+
+    img {
+      width: 50px !important;
+      height: 50px !important;
+      object-fit: cover;
+    }
+  }
+}

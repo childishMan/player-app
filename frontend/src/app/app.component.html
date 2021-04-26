@@ -1,0 +1,31 @@
+<div fxLayout='column' fxFlex='100' fxLayoutGap='25px'>
+  <div class='nav-wrapper' fxLayoutAlign="space-around">
+    <div class="nav" fxFlex='90' fxFlex.xs='100' fxLayoutAlign='space-between'>
+      <div class='logo' fxLayout fxLayoutAlign='center center' fxLayoutGap='20px' [routerLink]='[""]'>
+        <div *ngIf='!isPlaying'>
+          <img src="assets/images/logo.svg" class='upper-logo'>
+          <img src="assets/images/logo-green.svg" class='bottom-logo'>
+        </div>
+        <div style="padding: 0 20px;" *ngIf='isPlaying'>
+          <div class="visualizer">
+          </div>
+        </div>
+        <span>Music Player</span>
+      </div>
+      <div fxLayout fxLayoutGap='10px' fxLayoutAlign='center center'>
+        <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/login"]' routerLinkActive='active'>Login</a>
+        <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/register"]' routerLinkActive='active'>Sign up</a>
+        <user-badge *ngIf='isAuth()'></user-badge>
+      </div>
+    </div>
+  </div>
+  <div fxLayoutAlign="space-around" fxFlex>
+    <div fxFlex="88" fxFlex.xs='98' class='router-wrapper'>
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+  <div class="footer-wrapper" fxLayoutAlign='space-around'>
+    <div class="footer" fxFlex='90'></div>
+  </div>
+</div>

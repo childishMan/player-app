@@ -1,0 +1,43 @@
+<div fxLayout fxLayoutAlign='center'>
+  <div class='register' fxLayout='column' fxLayoutGap='20px' [formGroup]='registerGroup'>
+    <div class="pair">
+      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+        <mat-icon> supervisor_account </mat-icon>
+      </div>
+      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+        <input type="email" formControlName='email' placeholder="Email">
+        <mat-icon>error</mat-icon>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+        <mat-icon> supervisor_account </mat-icon>
+      </div>
+      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+        <input type="text" formControlName='nickname' placeholder="Nickname">
+        <mat-icon>error</mat-icon>
+      </div>
+    </div>
+    <div class="pair" fxLayout='row' fxLayoutAlign='space-around'>
+        <button mat-button fxFlex='90' (click)='openDialog()'>UploadFile</button>
+    </div>
+    <div class="pair">
+      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+        <mat-icon> supervisor_account </mat-icon>
+      </div>
+      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+        <input type="password" formControlName='password' placeholder="Password">
+        <mat-icon>error</mat-icon>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+        <mat-icon> supervisor_account </mat-icon>
+      </div>
+      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+        <input type="password" formControlName='re_password' placeholder="Re-enter password">
+        <mat-icon>error</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

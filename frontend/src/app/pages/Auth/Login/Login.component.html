@@ -1,0 +1,29 @@
+<div fxLayout='row' fxLayoutAlign='space-around center' fxFlex='100' class='wrapper'>
+    <div class='control' fxLayout='column' fxLayoutGap='40px' [formGroup]='loginGroup'>
+        <span class="header">Sign In</span>
+        <div class="pair" fxLayout='row' fxLayoutGap='20px'>
+            <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+                <mat-icon> supervisor_account </mat-icon>
+            </div>
+            <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+                <input type="email" formControlName='email' placeholder="Email">
+                <mat-icon *ngIf='getError("email")'>error</mat-icon>
+            </div>
+        </div>
+        <div class="pair" fxLayout='row' fxLayoutGap='20px'>
+            <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
+                <mat-icon> lock </mat-icon>
+            </div>
+            <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
+                <input type="password" formControlName='password' placeholder="Password">
+                <mat-icon *ngIf='getError("password")'>error</mat-icon>
+            </div>
+        </div>
+        <div class='err' *ngIf='error'>
+            {{error}}
+        </div>
+        <div fxLayout='row'>
+            <button mat-raised-button color='secondary' fxFlex='100' (click)='submit()'>Login</button>
+        </div>
+    </div>
+</div>

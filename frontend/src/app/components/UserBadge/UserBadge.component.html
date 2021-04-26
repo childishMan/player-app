@@ -1,0 +1,15 @@
+<div fxLayout fxLayoutAlign='space-between' class='user-badge'>
+  <div class="logo">
+    <img [src]='data.imageUrl'>
+  </div>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <div fxLayout fxLayoutAlign='space-between center'>
+      <span>{{data.nickname}}</span>
+      <mat-icon> keyboard_arrow_down </mat-icon>
+    </div>
+  </button>
+<mat-menu #menu="matMenu">
+  <div>{{data.email}}</div>
+  <button mat-button (click)='logout()' >Logout</button>
+</mat-menu>
+</div>
