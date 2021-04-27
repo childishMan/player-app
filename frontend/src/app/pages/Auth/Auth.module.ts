@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogModule } from 'src/app/components/dialogs/Dialog.module';
 import { MatInputModule} from '@angular/material/input'
+import { CustomComponentsModule } from 'src/app/components/custom-components.module';
 
 const routes: Routes = [
   {
@@ -36,10 +37,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FlexLayoutModule,
     MatButtonModule,
-    MatIconModule,
     ReactiveFormsModule,
     DialogModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    CustomComponentsModule
   ],
   declarations: [RegisterComponent, LoginComponent],
 })

@@ -1,3 +1,4 @@
+import { SuccessComponent } from './Success/Success.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
@@ -16,8 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatButtonModule,
     NgxFileDropModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
-  declarations: [ImageUploadComponent],
+  declarations: [ImageUploadComponent,SuccessComponent],
 })
 export class DialogModule {}

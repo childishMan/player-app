@@ -13,6 +13,10 @@ const routes:Routes = [
         loadChildren:()=>import('./pages/Auth/Auth.module').then(m=>m.AuthModule)
     },
     {
+        path:'songs',
+        loadChildren:()=>import('./pages/Songs/Songs.module').then(m=>m.SongsModule)
+    },
+    {
         path:'',
         component:InitialComponent,
         canActivate:[RedirectAfterLoginGuard]

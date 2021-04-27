@@ -1,6 +1,9 @@
 <div fxLayout fxLayoutAlign='space-between' class='user-badge'>
   <div class="logo">
-    <img [src]='data.imageUrl'>
+    <img [src]='data.imageUrl' *ngIf='!isLoading || !data.imageUrl'>
+    <div class='spinner' *ngIf='isLoading' fxLayout fxLayoutAlign='center center'>
+      <mat-spinner [diameter]='20'></mat-spinner>
+    </div>
   </div>
   <button mat-button [matMenuTriggerFor]="menu">
     <div fxLayout fxLayoutAlign='space-between center'>
@@ -8,8 +11,8 @@
       <mat-icon> keyboard_arrow_down </mat-icon>
     </div>
   </button>
-<mat-menu #menu="matMenu">
-  <div>{{data.email}}</div>
-  <button mat-button (click)='logout()' >Logout</button>
-</mat-menu>
+  <mat-menu #menu="matMenu" style="padding: 10px;">
+    <div>{{data.email}}</div>
+    <button mat-button (click)='logout()'>Logout</button>
+  </mat-menu>
 </div>

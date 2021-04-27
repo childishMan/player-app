@@ -19,7 +19,8 @@ export class FileService {
 
   getFile(type: FileType, name: string): Observable<any> {
     return this.httpClient.get(this.apiPath + this.typeToString(type) + '/' + name,{headers:{
-      'content-type':this.getContentType(type,name)
+      'content-type':this.getContentType(type,name),
+      'accept-range':type == FileType.Audio?'bytes':''
     },
   responseType:'blob'});
   }

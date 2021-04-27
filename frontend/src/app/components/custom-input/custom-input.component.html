@@ -1,0 +1,10 @@
+<div fxLayout fxFlex='100' fxLayoutGap='10px' fxLayoutAlign='start center'>
+  <div fxLayout fxLayoutAlign='center center' class='icon-holder'>
+    <mat-icon *ngIf='leftIcon'>{{leftIcon}}</mat-icon>
+  </div>
+  <mat-form-field [formGroup]='mainControl'>
+    <mat-label *ngIf='label'>{{label}}</mat-label>
+    <input autocomplete="off" [type]='type?type:"text"' matInput [placeholder]="placeholder" [formControlName]='control' (ngModel)='value'>
+    <mat-icon style="color: red;" matSuffix *ngIf='suffix'>{{suffix}}</mat-icon>
+  </mat-form-field>
+</div>

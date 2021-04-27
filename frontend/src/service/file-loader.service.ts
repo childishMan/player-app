@@ -2,7 +2,7 @@ import { FileService } from 'src/service/file.service';
 import { FileConverterService } from 'src/service/file-converter.service';
 import { Injectable } from '@angular/core';
 import { FileType } from 'src/static/fileTypes';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,15 @@ getImageUrl(imageName:string):Subject<string>{
   (err)=>obs.error(err));
 
   return obs;
+}
+
+getSong(name:string):Subject<string>{
+  let subj = new Subject<string>();
+
+  this.api.getFile(FileType.Audio,name).subscribe((data)=>{
+    subj.next(this.converter.blobToImage(data))
+  },(err)=>console.log(err));
+  return subj;
 }
 
 }

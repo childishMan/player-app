@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './pages/NotFound/NotFound.component';
 import { DialogModule } from './components/dialogs/Dialog.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,14 +20,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtModule } from '@auth0/angular-jwt';
-import { UserBadgeComponent } from './components/UserBadge/UserBadge.component';
+import { CustomComponentsModule } from './components/custom-components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     InitialComponent,
     HomeComponent,
-    UserBadgeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,7 @@ import { UserBadgeComponent } from './components/UserBadge/UserBadge.component';
     MatButtonModule,
     DialogModule,
     MatDialogModule,
+    CustomComponentsModule
   ],
   providers: [
     {

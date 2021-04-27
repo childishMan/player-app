@@ -1,10 +1,11 @@
+import { User } from './../dtos/createUser';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserInfo } from './../dtos/userInfo';
 import { login } from './../dtos/login';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { LoginStatus } from 'src/assets/LoginStatus';
 import { Router } from '@angular/router';
 
@@ -56,6 +57,10 @@ export class AuthService {
     return sub;
   }
 
+  register(data:User):Observable<any>{
+    return this.httpClient.post(this.apiPath+'create',data);
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['']);
@@ -71,7 +76,7 @@ export class AuthService {
       model = {
         nickname:decodedToken.nickname,
         email:decodedToken.email,
-        imageUrl:decodedToken.iamgeUrl
+        imageUrl:decodedToken.imageUrl
       }
 
       this.id = decodedToken.id;

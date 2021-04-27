@@ -1,43 +1,20 @@
 <div fxLayout fxLayoutAlign='center'>
-  <div class='register' fxLayout='column' fxLayoutGap='20px' [formGroup]='registerGroup'>
-    <div class="pair">
-      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
-        <mat-icon> supervisor_account </mat-icon>
-      </div>
-      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
-        <input type="email" formControlName='email' placeholder="Email">
-        <mat-icon>error</mat-icon>
-      </div>
+  <div class='register' fxLayout='column' fxLayoutGap='40px'>
+    <custom-input [type]='"email"' [leftIcon]="'mail_outline'" [control]='"email"' [placeholder]='"Email"'
+      [mainControl]='registerGroup' autocomplete="off"></custom-input>
+    <custom-input [type]='"text"' [leftIcon]="'supervisor_account'" [control]='"nickname"' [placeholder]='"Nickname"'
+      [mainControl]='registerGroup' autocomplete="off"></custom-input>
+    <custom-input [type]='"password"' [leftIcon]="'lock'" [control]='"password"'
+      [placeholder]='"Password"' [mainControl]='registerGroup' autocomplete="off"></custom-input>
+    <custom-input [type]='"password"' [leftIcon]="'lock'" [control]='"re_password"'
+      [placeholder]='"Re-enter password"' [mainControl]='registerGroup' autocomplete="off"></custom-input>
+    <div class="pair" fxLayout='row' fxLayoutAlign='space-between center'>
+      Load Image
+      <button mat-button  (click)='openDialog()'>UploadFile</button>
     </div>
-    <div class="pair">
-      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
-        <mat-icon> supervisor_account </mat-icon>
-      </div>
-      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
-        <input type="text" formControlName='nickname' placeholder="Nickname">
-        <mat-icon>error</mat-icon>
-      </div>
-    </div>
-    <div class="pair" fxLayout='row' fxLayoutAlign='space-around'>
-        <button mat-button fxFlex='90' (click)='openDialog()'>UploadFile</button>
-    </div>
-    <div class="pair">
-      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
-        <mat-icon> supervisor_account </mat-icon>
-      </div>
-      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
-        <input type="password" formControlName='password' placeholder="Password">
-        <mat-icon>error</mat-icon>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="icon-holder" fxLayout='row' fxLayoutAlign='center center'>
-        <mat-icon> supervisor_account </mat-icon>
-      </div>
-      <div fxLayout='row' fxFlex='90' fxLayoutAlign='space-between center' class='cinput'>
-        <input type="password" formControlName='re_password' placeholder="Re-enter password">
-        <mat-icon>error</mat-icon>
-      </div>
+    <div class="error" *ngIf='error'>{{error}}</div>
+    <div fxLayoutAlign='center'>
+      <button mat-button (click)='submit()'>Register</button>
     </div>
   </div>
 </div>

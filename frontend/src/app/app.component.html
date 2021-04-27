@@ -15,7 +15,8 @@
       <div fxLayout fxLayoutGap='10px' fxLayoutAlign='center center'>
         <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/login"]' routerLinkActive='active'>Login</a>
         <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/register"]' routerLinkActive='active'>Sign up</a>
-        <user-badge *ngIf='isAuth()'></user-badge>
+        <a class='link' *ngIf='isAuth()' [routerLink]='["/songs/all"]' routerLinkActive='active'>Songs</a>
+         <user-badge *ngIf='isAuth()'></user-badge>
       </div>
     </div>
   </div>

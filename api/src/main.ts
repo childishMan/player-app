@@ -8,10 +8,11 @@ const folders = ['/files','/files/images','/files/songs']
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+  let current = process.cwd();
+  console.log(current);
   folders.forEach(f=>{
-    if(!fs.existsSync(f)){
-      fs.mkdirSync(f);
+    if(!fs.existsSync(current+f)){
+      fs.mkdirSync(current+f);
     }
   })
   
