@@ -19,10 +19,14 @@ export class SongCardComponent implements OnInit {
   };
 
   isPlaying = false;
+  isLoading = false;
 
   image: string | SafeResourceUrl = 'assets/images/choppa.jpg';
 
-  constructor(private playService:MusicPlayService) {
+  constructor(public playService:MusicPlayService) {
+    playService.isPlaying.subscribe((val)=>{
+      this.isPlaying = val && playService.currentSongInfo.id === this.data.id
+    })
   }
 
   ngOnInit() {}
@@ -33,6 +37,10 @@ export class SongCardComponent implements OnInit {
 
   pause(){
     this.playService.pause();
+  }
+
+  stop(){
+    this.playService.stop();
   }
 
   playing():Subject<boolean>{

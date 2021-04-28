@@ -21,7 +21,6 @@ export class HeaderInterceptor implements HttpInterceptor {
       headers = headers.set('Content-Type','application/json');
     }
       
-    
     let token = localStorage.getItem('token');
     if (token) {
       headers = headers.set(
@@ -29,8 +28,6 @@ export class HeaderInterceptor implements HttpInterceptor {
         'Bearer ' + token
       );
     }
-
-    console.log(headers)
 
     const authReq = req.clone({ headers });
     return next.handle(authReq);

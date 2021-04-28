@@ -1,23 +1,28 @@
 <div class="song-card {{isPlaying?'playing':''}}" fxFlex='100'>
-  <div *ngIf='data.id' fxFlex='100' fxLayout='row' fxLayoutAlign='space-between'>
-    <div fxLayout='row' fxLayoutGap='15px'>
+  <div *ngIf='data.id' fxFlex='100' fxLayout='row' fxLayoutAlign='space-between'
+  fxLayout.xs='column' fxLayoutAlign.xs='center center' fxLayoutGap.xs='15px'>
+    <div fxLayout='row' fxLayoutGap.gt-xs='15px' fxLayout.xs='column'>
       <div class='img' fxLayout='column' fxLayoutAlign='center'>
         <img [src]='image'>
-        <div fxLayout='row' fxLayoutAlign='center center' class='spinner'>
+        <div fxLayout='row' fxLayoutAlign='center center' class='spinner' *ngIf='isLoading'>
           <mat-spinner [diameter]='40'></mat-spinner>
         </div>
       </div>
-      <div fxLayout='column' fxLayoutAlign='space-evenly' fxFill>
+      <div fxLayout='column' fxLayoutAlign='space-evenly'>
         <div class='name'>{{data.name}}</div>
         <div class='artists'>{{data.artists}}</div>
       </div>
     </div>
     <div class="control" fxLayout fxLayoutAlign='start center' fxLayoutGap='15px'>
-      <div class="play button" (click)='play()' fxLayout fxLayoutAlign='center center'>
+      <mat-slider fxHide.xs [min]='0' [max]='100' [step]='2' [value]='playService.getVolume()' (valueChange)='playService.changeVolume($event)'></mat-slider>
+      <div class="play button" (click)='play()' *ngIf='!isPlaying' fxLayout fxLayoutAlign='center center'>
         <mat-icon> play_arrow </mat-icon>
       </div>
-      <div class="pause button" (click)='pause()' fxLayout fxLayoutAlign='center center'>
+      <div class="pause button" (click)='pause()' *ngIf='isPlaying' fxLayout fxLayoutAlign='center center'>
         <mat-icon> pause </mat-icon>
+      </div>
+      <div class="stop button" (click)='stop()' *ngIf='isPlaying' fxLayout fxLayoutAlign='center center'>
+        <mat-icon> stop </mat-icon>
       </div>
     </div>
   </div>

@@ -9,21 +9,23 @@ import { Subject } from 'rxjs';
 })
 export class MusicPlayService {
   isPlaying: Subject<boolean> = new Subject<boolean>();
-  currentSongInfo: Subject<Song> = new Subject<Song>();
+  currentSongInfo: Song = { id: '' };
   isPaused = false;
 
-  audio = new Audio();
+  private audio = new Audio();
 
-  constructor(
-    private api: FileLoaderService
-  ) {}
+  constructor(private api: FileLoaderService) {
+    this.audio.addEventListener("ended",(event)=>{
+      this.isPlaying.next(false);
+    })
+  }
 
   play(data: Song) {
-    if (this.isPaused) {
+    if (this.isPaused && data.id === this.currentSongInfo.id) {
+      this.isPlaying.next(true);
       this.audio.play();
-    } 
-    else {
-      this.currentSongInfo.next(data);
+    } else if (data.songUrl) {
+      this.currentSongInfo = data;
       this.api.getSong(data.songUrl).subscribe((link) => {
         this.audio.src = link;
         this.audio.load();
@@ -36,7 +38,7 @@ export class MusicPlayService {
   stop() {
     this.isPaused = false;
     this.audio.pause();
-    this.currentSongInfo.next();
+    this.currentSongInfo = { id: '' };
     this.isPlaying.next(false);
   }
 
@@ -44,5 +46,15 @@ export class MusicPlayService {
     this.isPaused = true;
     this.isPlaying.next(false);
     this.audio.pause();
+  }
+
+  changeVolume(val: number | null) {
+    if (val) {
+      this.audio.volume = val / 100.0;
+    }
+  }
+
+  getVolume():number{
+    return this.audio.volume*100;
   }
 }

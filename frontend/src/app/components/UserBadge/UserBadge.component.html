@@ -11,8 +11,11 @@
       <mat-icon> keyboard_arrow_down </mat-icon>
     </div>
   </button>
-  <mat-menu #menu="matMenu" style="padding: 10px;">
-    <div>{{data.email}}</div>
-    <button mat-button (click)='logout()'>Logout</button>
+  <mat-menu #menu="matMenu">
+    <div style="padding: 10px;" fxLayout='column' fxLayoutGap='5px'>
+      <div>{{data.email}}</div>
+      <button mat-button (click)='logout()'>Logout</button>
+      <button mat-button fxShow.xs (click)='redirect("/songs")'>Songs</button>
+    </div>
   </mat-menu>
 </div>

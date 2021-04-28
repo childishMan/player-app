@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileLoaderService } from './../../../service/file-loader.service';
 import { UserInfo } from './../../../dtos/userInfo';
@@ -17,7 +18,8 @@ export class UserBadgeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private fileLoader: FileLoaderService,
-    private sanitizer:DomSanitizer
+    private sanitizer:DomSanitizer,
+    private router:Router
   ) {
     this.data = { nickname: '', email: '', imageUrl: '' };
   }
@@ -44,5 +46,9 @@ export class UserBadgeComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  redirect(path:string){
+    this.router.navigate([path]);
   }
 }

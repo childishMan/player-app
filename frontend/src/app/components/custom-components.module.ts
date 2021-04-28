@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CustomInputComponent } from './custom-input/custom-input.component';
@@ -20,10 +21,11 @@ import { UserBadgeComponent } from './UserBadge/UserBadge.component';
     FlexLayoutModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule,
   ],
-  exports: [UserBadgeComponent, CustomInputComponent,SongCardComponent],
-  declarations: [UserBadgeComponent, CustomInputComponent,SongCardComponent],
+  exports: [UserBadgeComponent, CustomInputComponent, SongCardComponent],
+  declarations: [UserBadgeComponent, CustomInputComponent, SongCardComponent],
   providers: [],
 })
 export class CustomComponentsModule {}

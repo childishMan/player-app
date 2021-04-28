@@ -1,14 +1,18 @@
 .song-card {
-  height: 150px;
+  transition: ease-in 0.1s;
+  min-height: 150px;
   border: 1px solid white;
   padding: 10px 25px;
   border-radius: 20px;
+  box-sizing: border-box;
 
   .img {
     position: relative;
+    max-height: 150px;
+    max-width: 150px;
     img {
-      height: 100px;
-      width: 100px;
+      width: 100%;
+      height: 100%;
       object-fit: scale-down;
     }
 
@@ -18,6 +22,16 @@
       height: 100%;
       background-color: rgba($color: #000000, $alpha: 0.5);
     }
+  }
+
+  .name {
+    font-weight: bold;
+    font-size: 22px;
+  }
+
+  .artists {
+    font-size: 17px;
+    font-style: italic;
   }
 
   .control {
@@ -46,7 +60,30 @@
   }
 }
 
-.song-card.palying{
-    border-color: aquamarine;
-    border-width: 2px;
+.song-card.playing {
+  border-color: aquamarine;
+  animation-name: bord;
+  animation-duration: 0.3s;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bord {
+  0%,
+  19.9% {
+    box-shadow: 0 0 10px aquamarine;
+  }
+  20%,
+  49.9% {
+    box-shadow: 0 0 15px aquamarine;
+  }
+  50%,
+  79.9% {
+    box-shadow: 0 0 5px aquamarine;
+  }
+  80%,
+  100% {
+    box-shadow: 0 0 20px aquamarine;
+  }
 }
