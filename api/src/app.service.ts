@@ -1,8 +1,10 @@
+import { UserInfo } from './auth/dtos/userInfo';
 import { Injectable } from '@nestjs/common';
+import jwtDecode from 'jwt-decode';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  public getUserByToken(token: string): UserInfo {
+    return jwtDecode<UserInfo>(token);
   }
 }

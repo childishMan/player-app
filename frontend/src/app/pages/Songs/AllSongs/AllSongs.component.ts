@@ -1,33 +1,42 @@
+import { SongEditComponent } from './../../../components/dialogs/SongEdit/SongEdit.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from './../../../../service/api.service';
 import { Song } from './../../../../dtos/song';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-AllSongs',
+  selector: 'AllSongs',
   templateUrl: './AllSongs.component.html',
   styleUrls: ['./AllSongs.component.scss']
 })
 export class AllSongsComponent implements OnInit {
 
-  songs:Song[] = [
-    {
-    artists:'First song',
-    name:'Song actually',
-    coverUrl:'',
-    id:'1',
-    songUrl:'1619523731992;;.mp3'
-  },
-  {
-    artists:'Second song',
-    name:'Song actually',
-    coverUrl:'',
-    id:'2',
-    songUrl:'1619522256985tryna.mp3'
-  },
-]
+  songs:Song[] = [];
+  isLoading = false;
 
-  constructor() { }
+  constructor(private api:ApiService,private dialog:MatDialog) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  openEdit(){
+    this.dialog.open(SongEditComponent).afterClosed().subscribe((val)=>{
+      if(val){
+        this.refresh();
+      }
+    });
+  }
+
+  refresh(){
+    this.isLoading = true;
+    this.api.get("/songs").subscribe((resp:Song[])=>{
+        this.songs = [...resp];
+        this.isLoading = false;
+    },
+    ()=>{
+      this.isLoading = false;
+    })
   }
 
 }

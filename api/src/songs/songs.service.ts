@@ -2,7 +2,6 @@ import { GetSong } from './dtos/GetSong';
 import { User } from './../entities/User';
 import { Playlist } from './../entities/Playlist';
 import { Repository, getRepository } from 'typeorm';
-import { NewSong } from './dtos/AddSong';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Song } from 'src/entities/Song';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,48 +10,74 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class SongsService {
   private userRepo: Repository<User>;
 
-  constructor( @InjectRepository(Song) private songsRepo:Repository<Song>,
-               @InjectRepository(Playlist) private playlistRepo:Repository<Playlist>) 
-               {
-                    this.userRepo = getRepository(User);
-               }
+  constructor(
+    @InjectRepository(Song) private songsRepo: Repository<Song>,
+    @InjectRepository(Playlist) private playlistRepo: Repository<Playlist>,
+  ) {
+    this.userRepo = getRepository(User);
+  }
 
-  async addSong(song: NewSong) {
+  async addSong(song: GetSong) {
     let user = await this.userRepo.findOne({ id: song.uploader });
-
-    if(!user){
-        throw new HttpException('user not found',HttpStatus.BAD_REQUEST);
+    if (!user) {
+      throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
     }
 
-    this.songsRepo.create({ 
-        name: song.name,
-        songUrl:song.path,
-        artists:song.artists,
-        uploader:user,
-        coverUrl:song.coverUrl
+    await this.songsRepo.save({
+      name: song.name,
+      songUrl: song.songUrl,
+      artists: song.artists,
+      uploader: user,
+      coverUrl: song.coverUrl,
+      isPublic:song.isPublic
     });
   }
 
-   validateSong(song: NewSong): boolean{
+  async editSong(song:GetSong){
+    let existingSong = await this.songsRepo.findOne({id:song.id});
+
+    if(!existingSong){
+      throw new HttpException('song not found', HttpStatus.BAD_REQUEST);
+    }
+
+    await this.songsRepo.createQueryBuilder().update().set({artists:song.artists,name:song.name,coverUrl:song.coverUrl});
+  }
+
+  validateSong(song: GetSong): boolean {
     return (
       song &&
       song.artists != '' &&
       song.name != '' &&
-      song.path != '' &&
-      song.uploader != undefined 
+      song.songUrl != '' &&
+      song.uploader != undefined
     );
   }
 
-  async getAllSongs():Promise<GetSong[]>{
-      return (await this.songsRepo.find()).map((e:Song)=>{
-          let a:GetSong = {
-              id:e.id,
-              name:e.name,
-              coverUrl:e.coverUrl,
-              songUrl:e.songUrl,
-              artists:e.artists
-          }
-          return a;
+  async getAllSongs(userId?: string): Promise<GetSong[]> {
+    return (
+      await this.songsRepo.find({
+        where: [
+          {
+            isPublic: 'true',
+          },
+          {
+            isPublic: 'false',
+            uploader: userId ?? '',
+          },
+        ],
+        relations: ['uploader'],
       })
+    ).map((e: Song) => {
+      let a: GetSong = {
+        id: e.id,
+        name: e.name,
+        coverUrl: e.coverUrl,
+        songUrl: e.songUrl,
+        artists: e.artists,
+        uploader: e.uploader.id,
+        isPublic:e.isPublic
+      };
+      return a;
+    });
   }
 }

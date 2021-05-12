@@ -12,7 +12,7 @@ export class ApiService {
         return this.httpClient.post(this.apiPath+path,data);
      }
 
-     get(path:string,params:HttpParams):Observable<any>{
+     get(path:string,params?:HttpParams):Observable<any>{
          return this.httpClient.get(this.apiPath+path,{params:params});
      }
 }

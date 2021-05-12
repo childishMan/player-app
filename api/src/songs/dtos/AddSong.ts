@@ -1,7 +1,8 @@
 export class NewSong{
-    path:string;
+    fileName:string;
     name:string;
     artists:string;
     uploader:string;
     coverUrl:string;
+    isPublic:boolean;
 }

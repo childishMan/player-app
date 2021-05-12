@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
     private dialog: MatDialog,
     private _builder: FormBuilder,
     private api: AuthService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.registerGroup = _builder.group({
       nickname: [
@@ -60,12 +61,18 @@ export class RegisterComponent implements OnInit {
               .open(SuccessComponent)
               .afterClosed()
               .subscribe(() => {
-                this.router.navigate([]);
+                let model = {
+                  email: this.registerGroup.get('email')?.value,
+                  password: this.registerGroup.get('password')?.value,
+                };
+
+                if (model.email && model.password) {
+                  this.auth.login(model);
+                }
+                  this.router.navigate([''])
               });
           },
           (err: HttpErrorResponse) => {
-            console.log('err');
-            console.log(err);
             switch (err.status) {
               case 409: {
                 this.error = 'Email already claimed';

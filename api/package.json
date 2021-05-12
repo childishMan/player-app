@@ -21,14 +21,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@auth0/angular-jwt": "^5.0.2",
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/jwt": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^7.1.5",
+    "@types/jwt-decode": "^3.1.0",
     "bcryptjs": "^2.4.3",
     "fs": "0.0.1-security",
+    "jwt-decode": "^3.1.2",
     "mssql": "^6.3.1",
     "multer-ftp": "^1.2.0",
     "multer-sftp": "^1.1.1",

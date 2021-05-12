@@ -20,7 +20,7 @@ export class User{
     @Column({nullable:true})
     imageUrl?:string;
 
-    @ManyToOne(type => Song,s=>s.uploader)
+    @OneToMany(type => Song,s=>s.uploader,{onDelete:"SET NULL"})
     uploadedSongs:Song[];
 
     @OneToMany(type=>Playlist,p=>p.owner)

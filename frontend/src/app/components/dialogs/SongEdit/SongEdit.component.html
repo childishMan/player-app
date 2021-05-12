@@ -1,0 +1,38 @@
+<div mat-dialog-title fxLayout fxLayoutAlign='space-between center' class='header'>
+    <span *ngIf='song.id'>Edit Song</span>
+    <span *ngIf='!song.id'>Add Song</span>
+    <button mat-dialog-close class="btn close" mat-button>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content style="min-width: 300px; overflow-y: hidden;">
+    <div fxFlex='100' fxLayout='column' fxLayoutGap='15px' [formGroup]='form'>
+        <custom-input [control]='"name"' [mainControl]='form' [suffix]='"error"' [placeholder]='"Song Name"'
+            [label]='"Song Name"' [predefined]='song?.name'></custom-input>
+        <custom-input [control]='"artists"' [mainControl]='form' [suffix]='"error"' [placeholder]='"Artists"'
+            [label]='"Artists"' [predefined]='song?.artists'></custom-input>
+        <div fxLayout fxLayoutAlign='space-between center' *ngIf='!isEdit'>
+            <span>Song</span>
+            <div fxLayout fxLayoutGap='5px' fxLayoutAlign='start center'>
+                <button mat-button class="btn green" (click)='openAudioDialog()'>Upload</button>
+                <mat-icon style="color:green" *ngIf='form.get("songUrl")?.value && !form.get("songUrl")?.errors'>check
+                </mat-icon>
+                <mat-icon style="color:red" *ngIf='form.get("songUrl")?.errors && form.get("songUrl")?.touched'>error
+                </mat-icon>
+            </div>
+        </div>
+        <div fxLayout fxLayoutAlign='space-between center'>
+            <span>Song cover</span>
+            <div fxLayout fxLayoutGap='5px' fxLayoutAlign='start center'>
+                <button mat-button class="btn green" (click)='openImageUpload()'>Upload</button>
+                <mat-icon style="color:green" *ngIf='form.get("coverUrl")?.value'>check</mat-icon>
+            </div>
+        </div>
+        <mat-checkbox formControlName='isPublic'> Is Public?
+        </mat-checkbox>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align='center'>
+    <button mat-button (click)='submit()' class='btn green'>Submit</button>
+</mat-dialog-actions>

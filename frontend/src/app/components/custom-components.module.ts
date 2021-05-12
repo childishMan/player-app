@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CustomInputComponent } from './custom-input/custom-input.component';
 import { UserBadgeComponent } from './UserBadge/UserBadge.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { UserBadgeComponent } from './UserBadge/UserBadge.component';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatSliderModule,
+    MatDividerModule,
   ],
   exports: [UserBadgeComponent, CustomInputComponent, SongCardComponent],
   declarations: [UserBadgeComponent, CustomInputComponent, SongCardComponent],

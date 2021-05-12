@@ -1,5 +1,5 @@
 import { User } from './User';
-import { Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Playlist } from './Playlist';
 
 @Entity("song")
@@ -13,7 +13,7 @@ export class Song{
     @Column()
     artists:string;
 
-    @OneToMany(type=>User,u=>u.uploadedSongs)
+    @ManyToOne(type=>User,u=>u.uploadedSongs)
     uploader:User;
 
     @Column({nullable:true})
@@ -24,6 +24,9 @@ export class Song{
 
     @Column()
     songUrl:string;
+
+    @Column({default:false})
+    isPublic:boolean;
 
     @CreateDateColumn()
     uploadedAt?:Date;

@@ -10,6 +10,9 @@ export class Playlist{
     @Column()
     name:string;
 
+    @Column()
+    isPublic:boolean;
+
     @ManyToMany(type => Song,s=>s.playlists)
     songs:Song[];
 

@@ -4,4 +4,6 @@ export interface GetSong{
     artists:string;
     coverUrl:string;
     songUrl:string;
+    uploader:string;
+    isPublic:boolean;
 }

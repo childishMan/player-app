@@ -1,11 +1,10 @@
-import { ApiService } from './../../../../service/api.service';
-import { Component, OnInit, Output } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
 import { FileService } from 'src/service/file.service';
 import { FileType } from 'src/static/fileTypes';
 import { FileConverterService } from 'src/service/file-converter.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { BlockScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'image-upload',
@@ -13,7 +12,8 @@ import { BlockScrollStrategy } from '@angular/cdk/overlay';
   styleUrls: ['./ImageUpload.component.scss', '../Overall.scss'],
 })
 export class ImageUploadComponent implements OnInit {
-  @Output() fileName = '';
+  public fileName = '';
+  public fileType = FileType.Image;
 
   defaultImage = 'assets/images/transparent.png';
   supportedTypes: string[] = ['jpg', 'jpeg', 'png'];
@@ -24,28 +24,38 @@ export class ImageUploadComponent implements OnInit {
   isUploading = false;
   error = '';
 
-  
-
-  private file:any;
+  private file: any;
 
   constructor(
     private fileApi: FileService,
     private converter: FileConverterService,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    @Inject(MAT_DIALOG_DATA) private data: any
+  ) {
+    if (data) {
+      this.fileType = data?.type ?? FileType.Image;
+    }
+    if (this.fileType === FileType.Audio) {
+      this.supportedTypes = ['mp3', 'ogg', 'wav', 'mpeg'];
+    }
+  }
 
   ngOnInit() {}
 
   getImagePath(): string | Blob | SafeResourceUrl {
+    if (this.fileType === FileType.Audio) return this.defaultImage;
     return this.actualFile ? this.actualFile : this.defaultImage;
   }
 
   getDropLabel(): string {
+    if (this.fileType === FileType.Audio)
+      return this.actualFile ? 'Done!' : 'Drop song here';
+      
     return this.actualFile ? '' : 'Drop image here';
   }
 
   dropped(data: NgxFileDropEntry[]) {
-    this.error = ''
+    this.error = '';
     this.isUploaded = false;
 
     if (data[0]?.fileEntry.isFile) {
@@ -71,7 +81,6 @@ export class ImageUploadComponent implements OnInit {
   }
 
   validateFile(file: File): boolean {
-
     let type = file.type.split('/')[1];
 
     if (!type || !this.supportedTypes.includes(type)) {
@@ -81,9 +90,13 @@ export class ImageUploadComponent implements OnInit {
     this.isLoading = true;
 
     this.error = '';
-    this.actualFile = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.converter.blobToImage(file as Blob)
-    );
+    if (this.fileType === FileType.Image) {
+      this.actualFile = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.converter.blobToImage(file as Blob)
+      );
+    } else {
+      this.actualFile = file;
+    }
     this.file = file;
 
     this.isLoading = false;
@@ -94,7 +107,7 @@ export class ImageUploadComponent implements OnInit {
   upload() {
     if (this.file) {
       this.isUploading = true;
-      this.fileApi.postFile(FileType.Image, this.file).subscribe(
+      this.fileApi.postFile(this.fileType, this.file).subscribe(
         (uploaded: { path: string }) => {
           if (uploaded && uploaded.path) {
             this.fileName = uploaded.path;
@@ -108,11 +121,9 @@ export class ImageUploadComponent implements OnInit {
           this.fileName = '';
           this.error = 'Error while loading file';
           this.isUploading = false;
-          console.log(err);
         }
       );
-    }
-    else{
+    } else {
       this.error = 'Select file first!';
     }
   }

@@ -1,8 +1,7 @@
 import { LoginInfo } from './dtos/login';
-import { JwtAuthGuard } from './../guard/jwtauth.guard';
 import { AuthService } from './auth.service';
 import { CreateUser } from './dtos/createUser';
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseUUIDPipe, Post, Req, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpException, HttpStatus, Post} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller("auth")

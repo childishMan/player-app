@@ -1,3 +1,17 @@
-<div fxFill fxLayout='column' fxLayoutGap='15px'>
-  <song-card *ngFor='let song of songs' [data]='song'></song-card>
+<div fxLayout='column' fxLayoutGap='40px'>
+  <div class="header" fxLayout fxLayoutAlign='space-between center'>
+    <div>
+      All Songs
+    </div>
+    <button mat-button (click)='openEdit()'>Upload new song</button>
+  </div>
+  <div fxFill fxLayout='column' fxLayoutGap='15px' *ngIf='!isLoading && songs.length !==0'>
+    <song-card *ngFor='let song of songs' [data]='song'></song-card>
+  </div>
+  <div *ngIf='isLoading' fxLayout fxLayoutAlign='center center' fxFill>
+    <mat-spinner [diameter]='60'></mat-spinner>
+  </div>
+  <div *ngIf='!isLoading && songs.length === 0' fxLayout fxLayoutAlign='center center' fxFill>
+    There are no songs
+  </div>
 </div>

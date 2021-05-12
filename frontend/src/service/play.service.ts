@@ -1,23 +1,22 @@
-import { DomSanitizer } from '@angular/platform-browser';
 import { FileLoaderService } from './file-loader.service';
 import { Song } from './../dtos/song';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MusicPlayService {
-  isPlaying: Subject<boolean> = new Subject<boolean>();
+  isPlaying: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentSongInfo: Song = { id: '' };
   isPaused = false;
 
   private audio = new Audio();
 
   constructor(private api: FileLoaderService) {
-    this.audio.addEventListener("ended",(event)=>{
+    this.audio.addEventListener('ended', (event) => {
       this.isPlaying.next(false);
-    })
+    });
   }
 
   play(data: Song) {
@@ -49,12 +48,12 @@ export class MusicPlayService {
   }
 
   changeVolume(val: number | null) {
-    if (val) {
+    if (val != null && val != undefined) {
       this.audio.volume = val / 100.0;
     }
   }
 
-  getVolume():number{
-    return this.audio.volume*100;
+  getVolume(): number {
+    return this.audio.volume * 100;
   }
 }

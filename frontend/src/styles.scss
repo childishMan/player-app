@@ -15,7 +15,7 @@ body {
 .mat-raised-button {
   font-family: "Inconsolata", monospace !important;
 }
-app-root {
+app-root,initial {
   width: 100%;
   height: 100%;
 }
@@ -26,7 +26,7 @@ router-outlet {
 }
 
 ngx-file-drop {
-  width:100%;
+  width: 100%;
   height: 100%;
   margin-bottom: 5px;
   z-index: 1;
@@ -45,10 +45,37 @@ ngx-file-drop {
   }
 }
 
-.mat-spinner circle{
+.mat-spinner circle {
   stroke: white !important;
 }
 
-.mat-menu-content{
+.mat-menu-content {
   padding: 10px !important;
+}
+
+.mat-divider {
+  border-color: #7fffd4;
+}
+
+mat-form-field input {
+  background-color: transparent !important;
+}
+
+::ng-deep
+  .mat-checkbox-checked.mat-accent
+  .mat-checkbox-ripple
+  .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: aquamarine !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: aquamarine;
+}
+
+.mat-checkbox-layout{
+  width: 100%;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }

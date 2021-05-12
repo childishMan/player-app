@@ -80,7 +80,21 @@ $color_high: aquamarine;
 .footer-wrapper {
   border-top: 1px solid white;
   .footer {
-    height: 50px;
+    min-height: 50px;
+  }
+
+  .footer-links{
+    margin-top: 10px;
+    a{
+      text-decoration: none;
+      color:gray;
+      font-weight: bold;
+      transition: ease-out .3s;
+    }
+
+   a:hover{
+      color:aquamarine;
+    }
   }
 }
 

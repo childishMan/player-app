@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="control" fxLayout fxLayoutAlign='start center' fxLayoutGap='15px'>
-      <mat-slider fxHide.xs [min]='0' [max]='100' [step]='2' [value]='playService.getVolume()' (valueChange)='playService.changeVolume($event)'></mat-slider>
+      <mat-slider fxHide.xs thumbLabel [displayWith]='formatPoints' [min]='0' [max]='100' [step]='2' [value]='playService.getVolume()' (input)='playService.changeVolume($event.value)'></mat-slider>
       <div class="play button" (click)='play()' *ngIf='!isPlaying' fxLayout fxLayoutAlign='center center'>
         <mat-icon> play_arrow </mat-icon>
       </div>
@@ -25,6 +25,11 @@
         <mat-icon> stop </mat-icon>
       </div>
     </div>
+  </div>
+  <div fxHide.xs *ngIf='id && data.uploader === id' class='edit'>
+    <button mat-button (click)='openEdit()'>
+      <mat-icon style="color:aquamarine">edit</mat-icon>
+    </button>
   </div>
   <div *ngIf='!data.id' fxFlex='100' fxLayout='row' fxLayoutAlign='center'>
     Error while loading data!

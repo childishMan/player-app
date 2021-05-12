@@ -1,12 +1,14 @@
 <div fxLayout fxLayoutAlign='space-between center' mat-dialog-header class='header'>
-  <div>Upload Image</div>
+  <div *ngIf='fileType === 1'>Upload Image</div>
+  <div *ngIf='fileType === 0'>Upload Song</div>
   <button mat-button mat-dialog-close>
     <mat-icon> close </mat-icon>
   </button>
 </div>
 <mat-dialog-content>
   <div fxLayout='column' class='uploader' fxLayoutGap='15px' fxLayoutAlign='center center'>
-    <div> Dropdown or select image ({{supportedTypes.join(' ,')}}) and press OK to select this one</div>
+    <div> Dropdown or select {{fileType===1?"image":"sound"}} ({{supportedTypes.join(' ,')}}) and press OK to select
+      this one</div>
     <div fxLayout='column' fxLayoutAlign='center center' class='drop'>
       <img [src]='getImagePath()' alt="">
       <ngx-file-drop fxFlex='100' dropZoneLabel='{{getDropLabel()}}' (onFileDrop)='dropped($event)' [multiple]='false'>

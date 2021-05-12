@@ -19,14 +19,15 @@
         <a class='link' *ngIf='isAuth()' [routerLink]='["/songs/all"]' routerLinkActive='active' fxHide.xs>Songs</a>
         <user-badge *ngIf='isAuth()'></user-badge>
       </div>
-      <button mat-button [matMenuTriggerFor]='menu' *ngIf='!isAuth()' fxShow.xs>
-        <mat-icon> toc </mat-icon>
-      </button>
-      <mat-menu #menu='matMenu'>
-        <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/login"]' routerLinkActive='active'>Login</a>
-        <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/register"]' routerLinkActive='active'>Sign up</a>
-        <a class='link' *ngIf='isAuth()' [routerLink]='["/songs/all"]' routerLinkActive='active'>Songs</a>
-      </mat-menu>
+      <div *ngIf='!isAuth()' fxLayout fxLayoutAlign='center center' fxHide.gt-xs>
+        <button mat-button [matMenuTriggerFor]='menu'>
+          <mat-icon> toc </mat-icon>
+        </button>
+        <mat-menu #menu='matMenu'>
+          <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/login"]' routerLinkActive='active'>Login</a>
+          <a class='link' *ngIf='!isAuth()' [routerLink]='["/auth/register"]' routerLinkActive='active'>Sign up</a>
+        </mat-menu>
+      </div>
     </div>
   </div>
   <div fxLayoutAlign="space-around" fxFlex>
@@ -35,6 +36,14 @@
     </div>
   </div>
   <div class="footer-wrapper" fxLayoutAlign='space-around'>
-    <div class="footer" fxFlex='90'></div>
+    <div class="footer" fxFlex='90' fxLayout='column' fxLayoutAlign='center center' fxLayoutGap='15px'>
+      <div fxLayout='row' fxLayoutAlign='center' fxLayoutGap='10px' class='footer-links'>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Credits</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class='copyright'>Copyright 2021. All rights reserved.</div>
+    </div>
   </div>
 </div>

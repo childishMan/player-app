@@ -1,5 +1,5 @@
+import { MusicPlayService } from './play.service';
 import { User } from './../dtos/createUser';
-
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserInfo } from './../dtos/userInfo';
 import { login } from './../dtos/login';
@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiPath = '/api/auth/';
   
-  id: number = 0;
+  id: string = '';
 
   private jwtHelper:JwtHelperService;
 
-  constructor(private httpClient: HttpClient,private router:Router) {
+  constructor(private httpClient: HttpClient,private router:Router,private playService:MusicPlayService) {
     this.jwtHelper = new JwtHelperService();
     let token = localStorage.getItem('token');
 
@@ -63,7 +63,9 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    this.playService.stop();
     this.router.navigate(['']);
+
   }
 
   getUserInfo():UserInfo {

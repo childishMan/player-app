@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserBadgeComponent implements OnInit {
   data: UserInfo;
-  defaultImage = 'assets/images/choppa.jpg';
+  defaultImage = 'assets/images/default-user.svg';
   isLoading = false;
 
   constructor(

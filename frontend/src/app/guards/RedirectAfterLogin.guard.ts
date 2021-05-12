@@ -8,7 +8,7 @@ export class RedirectAfterLoginGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(this.authService.isAuth()){
-            this.router.navigate(['home']);
+            this.router.navigate(['songs']);
             return false;
         }
         return true;

@@ -1,11 +1,9 @@
 import { RedirectAfterLoginGuard } from './guards/RedirectAfterLogin.guard';
 import { InitialComponent } from './pages/Initial/Initial.component';
 import { NotFoundComponent } from './pages/NotFound/NotFound.component';
-import { AppComponent } from './app.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { IsAuthGuard } from './guards/IsAuth.guard';
-import { HomeComponent } from './pages/Home/Home.component';
 
 const routes:Routes = [
     {
@@ -14,7 +12,8 @@ const routes:Routes = [
     },
     {
         path:'songs',
-        loadChildren:()=>import('./pages/Songs/Songs.module').then(m=>m.SongsModule)
+        loadChildren:()=>import('./pages/Songs/Songs.module').then(m=>m.SongsModule),
+        canActivate:[IsAuthGuard]
     },
     {
         path:'',
@@ -23,8 +22,7 @@ const routes:Routes = [
     },
     {
         path:'home',
-        component:HomeComponent,
-        canActivate:[IsAuthGuard]
+        redirectTo:'songs'
     },
     {
         path:'not-found',
