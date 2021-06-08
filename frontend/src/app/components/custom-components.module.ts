@@ -1,6 +1,6 @@
 import { SongCardComponent } from './song-card/song-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,6 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatProgressSpinnerModule,
     MatSliderModule,
     MatDividerModule,
+    FormsModule
   ],
   exports: [UserBadgeComponent, CustomInputComponent, SongCardComponent],
   declarations: [UserBadgeComponent, CustomInputComponent, SongCardComponent],

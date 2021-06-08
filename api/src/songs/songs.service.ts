@@ -29,18 +29,20 @@ export class SongsService {
       artists: song.artists,
       uploader: user,
       coverUrl: song.coverUrl,
-      isPublic:song.isPublic
+      isPublic: song.isPublic,
     });
   }
 
-  async editSong(song:GetSong){
-    let existingSong = await this.songsRepo.findOne({id:song.id});
+  async editSong(song: GetSong) {
 
-    if(!existingSong){
+    await this.songsRepo.update({ id: song.id },{
+      name:song.name,
+      artists:song.artists,
+      coverUrl:song.coverUrl,
+      isPublic:song.isPublic
+    }).catch((err)=>{
       throw new HttpException('song not found', HttpStatus.BAD_REQUEST);
-    }
-
-    await this.songsRepo.createQueryBuilder().update().set({artists:song.artists,name:song.name,coverUrl:song.coverUrl});
+    });
   }
 
   validateSong(song: GetSong): boolean {
@@ -75,7 +77,7 @@ export class SongsService {
         songUrl: e.songUrl,
         artists: e.artists,
         uploader: e.uploader.id,
-        isPublic:e.isPublic
+        isPublic: e.isPublic,
       };
       return a;
     });

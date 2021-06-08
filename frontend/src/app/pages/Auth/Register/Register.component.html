@@ -1,13 +1,13 @@
 <div fxLayout fxLayoutAlign='center'>
-  <div class='register' fxLayout='column' fxLayoutGap='40px'>
-    <custom-input [type]='"email"' [leftIcon]="'mail_outline'" [control]='"email"' [placeholder]='"Email"'
-      [mainControl]='registerGroup' autocomplete="off"></custom-input>
-    <custom-input [type]='"text"' [leftIcon]="'supervisor_account'" [control]='"nickname"' [placeholder]='"Nickname"'
-      [mainControl]='registerGroup' autocomplete="off"></custom-input>
-    <custom-input [type]='"password"' [leftIcon]="'lock'" [control]='"password"'
-      [placeholder]='"Password"' [mainControl]='registerGroup' autocomplete="off"></custom-input>
-    <custom-input [type]='"password"' [leftIcon]="'lock'" [control]='"re_password"'
-      [placeholder]='"Re-enter password"' [mainControl]='registerGroup' autocomplete="off"></custom-input>
+  <div [formGroup]='registerGroup' class='register' fxLayout='column' fxLayoutGap='40px'>
+    <custom-input [type]='"email"' [leftIcon]="'mail_outline'" formControlName='email' [placeholder]='"Email"'
+      autocomplete="off" [hasError]='registerGroup.get("email")?.errors != null'></custom-input>
+    <custom-input [type]='"text"' [leftIcon]="'supervisor_account'" formControlName='nickname' [placeholder]='"Nickname"'
+      autocomplete="off" [hasError]='registerGroup.get("nickname")?.errors != null'></custom-input>
+    <custom-input [type]='"password"' [leftIcon]="'lock'" formControlName='password'
+      [placeholder]='"Password"' autocomplete="off" [hasError]='registerGroup.get("password")?.errors != null'></custom-input>
+    <custom-input [type]='"password"' [leftIcon]="'lock'" formControlName='re_password'
+      [placeholder]='"Re-enter password"' autocomplete="off" [hasError]='registerGroup.get("re_password")?.errors != null'></custom-input>
     <div class="pair" fxLayout='row' fxLayoutAlign='space-between center'>
       Load Image
       <button mat-button  (click)='openDialog()'>UploadFile</button>

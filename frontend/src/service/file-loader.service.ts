@@ -5,37 +5,42 @@ import { FileType } from 'src/static/fileTypes';
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileLoaderService {
+  constructor(
+    private converter: FileConverterService,
+    private api: FileService
+  ) {}
 
-constructor(private converter:FileConverterService,private api:FileService) { }
+  getImageUrl(imageName: string): Subject<string> {
+    let obs = new Subject<string>();
 
-getImageUrl(imageName:string):Subject<string>{
-  let obs = new Subject<string>();
-  
-  this.api.getFile(FileType.Image,imageName).subscribe((val:Blob)=>{
-    let file = this.converter.blobToImage(val);
+    this.api.getFile(FileType.Image, imageName).subscribe(
+      (val: Blob) => {
+        let file = this.converter.blobToImage(val);
 
-    if(file){
-      obs.next(file);
-    }
-    else{
-      obs.error('error while parsing blob');
-    }
-  },
-  (err)=>obs.error(err));
+        if (file) {
+          obs.next(file);
+        } else {
+          obs.error('error while parsing blob');
+        }
+      },
+      (err) => obs.error(err)
+    );
 
-  return obs;
-}
+    return obs;
+  }
 
-getSong(name:string):Subject<string>{
-  let subj = new Subject<string>();
+  getSong(name: string): Subject<string> {
+    let subj = new Subject<string>();
 
-  this.api.getFile(FileType.Audio,name).subscribe((data)=>{
-    subj.next(this.converter.blobToImage(data))
-  },(err)=>console.log(err));
-  return subj;
-}
-
+    this.api.getFile(FileType.Audio, name).subscribe(
+      (data) => {
+        subj.next(this.converter.blobToImage(data));
+      },
+      (err) => console.log(err)
+    );
+    return subj;
+  }
 }

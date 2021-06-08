@@ -22,12 +22,6 @@ mat-form-field {
   }
 }
 
-
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
-.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: aquamarine;
-}
-
 ::ng-deep .mat-focused .mat-form-field-label {
   color: aquamarine !important;
 }

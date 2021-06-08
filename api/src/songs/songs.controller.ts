@@ -2,7 +2,6 @@ import { AppService } from './../app.service';
 import { JwtAuthGuard } from './../guard/jwtauth.guard';
 import { GetSong } from './dtos/GetSong';
 import { SongsService } from './songs.service';
-import { NewSong } from './dtos/AddSong';
 import {
   Body,
   Controller,
@@ -11,13 +10,8 @@ import {
   HttpStatus,
   Get,
   UseGuards,
-  UseInterceptors,
   Req,
-  Request,
-  Param,
 } from '@nestjs/common';
-import { AuthUser } from 'src/decorators/auth-user.decorator';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('songs')
 @UseGuards(JwtAuthGuard)
@@ -42,6 +36,7 @@ export class SongsController {
   @Get()
   @UseGuards(JwtAuthGuard)
   async getAllSongs(@Req() req): Promise<GetSong[]> {
+    console.log(req?.user?.userId);
     return await this.songsService.getAllSongs(req?.user?.userId);
   }
 }

@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImageUploadComponent } from 'src/app/components/dialogs/ImageUpload/ImageUpload.component';
 import { SuccessComponent } from 'src/app/components/dialogs/Success/Success.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RegisterStatus } from 'src/static/registerStatus';
 
 @Component({
   selector: 'app-Register',

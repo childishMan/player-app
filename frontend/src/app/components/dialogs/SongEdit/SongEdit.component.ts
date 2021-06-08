@@ -51,6 +51,10 @@ export class SongEditComponent implements OnInit {
         id: this.song.id,
         isPublic:this.song?.isPublic ?? false
       });
+
+      this.form.get('isPublic')?.valueChanges.subscribe((val)=>{
+        console.log("changed "+val);
+      })
     }
   }
 

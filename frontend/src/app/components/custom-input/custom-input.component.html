@@ -2,10 +2,10 @@
   <div fxLayout fxLayoutAlign='center center' class='icon-holder' *ngIf='leftIcon'>
     <mat-icon>{{leftIcon}}</mat-icon>
   </div>
-  <mat-form-field [formGroup]='mainControl' fxFlex='100'>
+  <mat-form-field fxFlex='100'>
     <mat-label *ngIf='label'>{{label}}</mat-label>
-    <input autocomplete="off" [type]='type?type:"text"' matInput [placeholder]="placeholder" [formControlName]='control' (ngModel)='type==="file"?value?.files[0] :value'>
-    <mat-icon style="color: red;" matSuffix *ngIf='suffix && getError()'>{{suffix}}</mat-icon>
-    <mat-error *ngIf='getError()'>Error occured</mat-error>
+    <input autocomplete="off"  [type]='type?type:"text"' matInput [placeholder]="placeholder" [(ngModel)]='value' (ngModelChange)='getValue($event)'>
+    <mat-icon style="color: red;" matSuffix *ngIf='suffix && hasError'>{{suffix}}</mat-icon>
+    <mat-error *ngIf='hasError'>Error occured</mat-error> 
   </mat-form-field>
 </div>

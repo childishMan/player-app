@@ -1,10 +1,10 @@
 <div fxLayout='row' fxLayoutAlign='space-around center' fxFlex='100' class='wrapper'>
     <div class='control' fxLayout='column' fxLayoutGap='40px' [formGroup]='loginGroup'>
         <span class="header">Sign In</span>
-        <custom-input [leftIcon]='"supervisor_account"' [type]='"email"' [control]='"email"' [placeholder]='"Email"'
-            [mainControl]='loginGroup'></custom-input>
-        <custom-input [leftIcon]='"lock"' [type]='"password"' [control]='"password"' [placeholder]='"Password"'
-            [mainControl]='loginGroup'></custom-input>
+        <custom-input [leftIcon]='"supervisor_account"' [type]='"email"' formControlName='email' [placeholder]='"Email"'
+            [hasError]='loginGroup.get("email")?.errors != null'></custom-input>
+        <custom-input [leftIcon]='"lock"' [type]='"password"' [hasError]='loginGroup.get("password")?.errors != null'
+            formControlName='password' [placeholder]='"Password"'></custom-input>
         <div class='err' *ngIf='error'>
             {{error}}
         </div>

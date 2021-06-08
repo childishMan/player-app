@@ -18,7 +18,7 @@ import { MulterModule } from '@nestjs/platform-express';
       host: 'DESKTOP-5H9GP9D',
       database: 'pc-db',
       username: 'main',
-      password: 'user',
+      password: 'main',
       keepConnectionAlive: true,
       entities: [User, Song, Playlist],
       synchronize: true,

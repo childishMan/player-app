@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.loginGroup.valueChanges.subscribe((val)=>console.log(val));
   }
 
   ngOnInit() {}

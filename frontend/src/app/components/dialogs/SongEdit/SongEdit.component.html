@@ -6,12 +6,12 @@
     </button>
 </div>
 
-<mat-dialog-content style="min-width: 300px; overflow-y: hidden;">
-    <div fxFlex='100' fxLayout='column' fxLayoutGap='15px' [formGroup]='form'>
-        <custom-input [control]='"name"' [mainControl]='form' [suffix]='"error"' [placeholder]='"Song Name"'
-            [label]='"Song Name"' [predefined]='song?.name'></custom-input>
-        <custom-input [control]='"artists"' [mainControl]='form' [suffix]='"error"' [placeholder]='"Artists"'
-            [label]='"Artists"' [predefined]='song?.artists'></custom-input>
+<mat-dialog-content  style="min-width: 300px; overflow-y: hidden;">
+    <div fxFlex='100' [formGroup]='form' fxLayout='column' fxLayoutGap='15px' [formGroup]='form'>
+        <custom-input formControlName='name' [hasError]='form.get("name")?.errors != null' [suffix]='"error"' [placeholder]='"Song Name"'
+            [label]='"Song Name"'></custom-input>
+        <custom-input formControlName='artists' [suffix]='"error"' [placeholder]='"Artists"'
+            [label]='"Artists"' [hasError]='form.get("artists")?.errors != null'></custom-input>
         <div fxLayout fxLayoutAlign='space-between center' *ngIf='!isEdit'>
             <span>Song</span>
             <div fxLayout fxLayoutGap='5px' fxLayoutAlign='start center'>

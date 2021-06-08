@@ -5,7 +5,7 @@ import { UserInfo } from './../dtos/userInfo';
 import { login } from './../dtos/login';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { LoginStatus } from 'src/assets/LoginStatus';
 import { Router } from '@angular/router';
 
@@ -27,8 +27,8 @@ export class AuthService {
 
   }
 
-  login(data: login): Subject<LoginStatus> {
-    let sub = new Subject<LoginStatus>();
+  login(data: login): BehaviorSubject<LoginStatus> {
+    let sub = new BehaviorSubject<LoginStatus>(LoginStatus.Invalid);
 
     this.httpClient.post(this.apiPath + 'login', data).subscribe(
       (tokenObj: any) => {

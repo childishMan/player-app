@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class FileConverterService {
 
 constructor() { }
-
+//mb implement file conversion in future
 blobToImage(blob:Blob):any{
     return URL.createObjectURL(blob);
 }
